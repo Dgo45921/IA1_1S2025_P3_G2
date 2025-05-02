@@ -1,4 +1,7 @@
-// === Listener para carga de laberinto JSON ===
+import { loadMaze } from './labyrinthGen/labyrinthGen.js';
+import { maze } from './labyrinthGen/labyrinthGen.js';
+
+
 const jsonInput = document.getElementById("jsonInput");
 
 jsonInput.addEventListener("change", (event) => {
@@ -9,8 +12,10 @@ jsonInput.addEventListener("change", (event) => {
   reader.onload = (e) => {
     try {
       const json = JSON.parse(e.target.result);
-      console.log("JSON cargado:", json);
-      // Aquí puedes llamar a tu lógica para construir el laberinto
+      // call for loadMaze
+      loadMaze(json);
+      console.log("Maze object:", maze);
+
     } catch (err) {
       console.error("Error al parsear el archivo JSON:", err);
     }

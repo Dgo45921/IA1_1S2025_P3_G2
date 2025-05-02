@@ -1,3 +1,14 @@
+// import { getSelectedAlgorithm } from './runAlgorithm.js';
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     const startBtn = document.getElementById("startBtn");
+//     startBtn.addEventListener("click", getSelectedAlgorithm);
+// });
+
+
+
+
+
 // === Inicialización de la escena Three.js ===
 const container = document.getElementById("render-container");
 
@@ -42,4 +53,6 @@ function animate() {
   renderer.render(scene, camera);
 }
 animate();
+
+
 
