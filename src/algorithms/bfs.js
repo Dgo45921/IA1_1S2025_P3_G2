@@ -29,21 +29,25 @@ function getNeighbors(node, maze) {
     const [x, y] = node;
     const neighbors = [];
 
-    if (x > 0 && maze[x - 1][y] === 0) neighbors.push([x - 1, y]);
-    if (x < maze.length - 1 && maze[x + 1][y] === 0) neighbors.push([x + 1, y]);
-    if (y > 0 && maze[x][y - 1] === 0) neighbors.push([x, y - 1]);
-    if (y < maze[0].length - 1 && maze[x][y + 1] === 0) neighbors.push([x, y + 1]);
+    if (y > 0 && maze[y - 1][x] === 0) neighbors.push([x, y - 1]);
+    if (y < maze.length - 1 && maze[y + 1][x] === 0) neighbors.push([x, y + 1]);
+    if (x > 0 && maze[y][x - 1] === 0) neighbors.push([x - 1, y]);
+    if (x < maze[0].length - 1 && maze[y][x + 1] === 0) neighbors.push([x + 1, y]);
 
     return neighbors;
 }
+
+
 function reconstructPath(parent, start, end) {
     const path = [];
     let current = end;
-
-    while (current) {
-        path.unshift(current);
-        current = parent.get(current.toString());
+  
+    while (current.toString() !== start.toString()) {
+      const currentKey = Array.isArray(current) ? current.toString() : current;
+      path.unshift(currentKey.split(',').map(Number));
+      current = parent.get(currentKey);
     }
-
+    path.unshift(start);
     return path;
-}
+  }
+  

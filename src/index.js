@@ -1,13 +1,5 @@
-// import { getSelectedAlgorithm } from './runAlgorithm.js';
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     const startBtn = document.getElementById("startBtn");
-//     startBtn.addEventListener("click", getSelectedAlgorithm);
-// });
-
-
-
-
+import { setScene } from "./labyrinthGen/labyrinthGen.js";
+import { getSelectedAlgorithm } from "./runAlgorithm.js";
 
 // === Inicialización de la escena Three.js ===
 const container = document.getElementById("render-container");
@@ -47,12 +39,41 @@ const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 cube.position.y = 0.5;
 scene.add(cube);
 
+// === Añadir robot ===
+const robotMaterial = new THREE.MeshStandardMaterial({ color: 0x0000ff });
+const robot = new THREE.Mesh(
+  new THREE.BoxGeometry(0.8, 0.8, 0.8),
+  robotMaterial
+);
+robot.userData.type = "robot";
+scene.add(robot);
+
+
+
 // === Render Loop ===
-function animate() {
+function animate(time) {
   requestAnimationFrame(animate);
+  TWEEN.update(time);           
   renderer.render(scene, camera);
 }
+
+export function adjustCamera(ancho, alto) {
+  const centerX = (ancho - 1) / 2;
+  const centerY = (alto - 1) / 2;
+
+  const maxDim = Math.max(ancho, alto);
+  camera.position.set(centerX, maxDim * 1.2, centerY + 0.001); // +0.001 evita dividir entre 0
+  camera.lookAt(centerX, 0, centerY);
+}
+
+
 animate();
 
+// Inyectamos la escena y el robot a otros módulos si lo necesitas
+setScene(scene, robot); 
 
-
+// Listener de inicio tras DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+  const startBtn = document.getElementById("startBtn");
+  startBtn.addEventListener("click", getSelectedAlgorithm);
+});
