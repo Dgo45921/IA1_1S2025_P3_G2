@@ -61,3 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const startBtn = document.getElementById("startBtn");
   startBtn.addEventListener("click", getSelectedAlgorithm);
 });
+
+// Listener de inicio tras DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+  const startBtn = document.getElementById("resetBtn");
+  startBtn.addEventListener("click", getSelectedAlgorithm);
+});
