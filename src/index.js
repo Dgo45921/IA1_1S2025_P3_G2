@@ -4,16 +4,13 @@ import { getSelectedAlgorithm } from "./runAlgorithm.js";
 const loader = new THREE.GLTFLoader(); 
 let robot; 
 
-const gh_url = 'https://dgo45921.github.io/IA1_1S2025_P3_G2/assets/model/scene.gltf';
-const local_url = '../assets/model/scene.gltf';
-
-const modelUrl = location.hostname === 'localhost' ? local_url : gh_url;
+const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+const modelUrl = isLocalhost ? '../assets/model/scene.gltf' : 'https://dgo45921.github.io/IA1_1S2025_P3_G2/assets/model/scene.gltf';
 
 loader.load(modelUrl, function (gltf) {
   robot = gltf.scene;
   robot.userData.type = "robot";
   scene.add(robot);
-
   setScene(scene, robot); 
 });
 
