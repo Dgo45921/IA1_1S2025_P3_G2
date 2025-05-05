@@ -1,0 +1,8 @@
+Model Information:
+* title:	The Penguin - FNAC
+* source:	https://sketchfab.com/3d-models/the-penguin-fnac-563610ba825a417b9d85cf5f95a7b8c3
+* author:	Frond Fox (https://sketchfab.com/frondfox)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

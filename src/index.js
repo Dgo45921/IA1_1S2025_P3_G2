@@ -1,6 +1,17 @@
 import { setScene } from "./labyrinthGen/labyrinthGen.js";
 import { getSelectedAlgorithm } from "./runAlgorithm.js";
 
+const loader = new THREE.GLTFLoader(); 
+let robot; // ← Aquí guardaremos el modelo glTF
+loader.load('../assets/model/scene.gltf', function (gltf) {
+  robot = gltf.scene;
+  robot.userData.type = "robot";
+  scene.add(robot);
+
+  // Inyectamos la escena y el robot glTF después de cargarlo
+  setScene(scene, robot); 
+});
+
 // === Inicialización de la escena Three.js ===
 const container = document.getElementById("render-container");
 
@@ -25,19 +36,6 @@ const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(10, 10, 10);
 scene.add(light);
 
-
-
-// === Añadir robot ===
-const robotMaterial = new THREE.MeshStandardMaterial({ color: 0x0000ff });
-const robot = new THREE.Mesh(
-  new THREE.BoxGeometry(0.8, 0.8, 0.8),
-  robotMaterial
-);
-robot.userData.type = "robot";
-scene.add(robot);
-
-
-
 // === Render Loop ===
 function animate(time) {
   requestAnimationFrame(animate);
@@ -50,15 +48,11 @@ export function adjustCamera(ancho, alto) {
   const centerY = (alto - 1) / 2;
 
   const maxDim = Math.max(ancho, alto);
-  camera.position.set(centerX, maxDim * 1.2, centerY + 0.001); // +0.001 evita dividir entre 0
+  camera.position.set(centerX, maxDim * 1.2, centerY + 0.001);
   camera.lookAt(centerX, 0, centerY);
 }
 
-
 animate();
-
-// Inyectamos la escena y el robot a otros módulos si lo necesitas
-setScene(scene, robot); 
 
 // Listener de inicio tras DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
