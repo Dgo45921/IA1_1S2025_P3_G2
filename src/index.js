@@ -25,19 +25,7 @@ const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(10, 10, 10);
 scene.add(light);
 
-// === Plano base (suelo) ===
-const planeGeometry = new THREE.PlaneGeometry(10, 10);
-const planeMaterial = new THREE.MeshStandardMaterial({ color: 0xcccccc });
-const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-plane.rotation.x = -Math.PI / 2;
-scene.add(plane);
 
-// === Cubo de prueba ===
-const cubeGeometry = new THREE.BoxGeometry();
-const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0x0077ff });
-const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-cube.position.y = 0.5;
-scene.add(cube);
 
 // === Añadir robot ===
 const robotMaterial = new THREE.MeshStandardMaterial({ color: 0x0000ff });

@@ -11,6 +11,7 @@ async function getSelectedAlgorithm() {
     const algorithmSelect = document.getElementById("algorithmSelect");
     const selectedAlgorithm = algorithmSelect.value;
     let solution = null;
+    console.log("Selected algorithm:", selectedAlgorithm);
 
     // Ejecutar el algoritmo correspondiente
     switch (selectedAlgorithm) {
