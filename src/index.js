@@ -2,13 +2,18 @@ import { setScene } from "./labyrinthGen/labyrinthGen.js";
 import { getSelectedAlgorithm } from "./runAlgorithm.js";
 
 const loader = new THREE.GLTFLoader(); 
-let robot; // ← Aquí guardaremos el modelo glTF
-loader.load('../assets/model/scene.gltf', function (gltf) {
+let robot; 
+
+const gh_url = 'https://dgo45921.github.io/IA1_1S2025_P3_G2/assets/model/scene.gltf';
+const local_url = '../assets/model/scene.gltf';
+
+const modelUrl = location.hostname === 'localhost' ? local_url : gh_url;
+
+loader.load(modelUrl, function (gltf) {
   robot = gltf.scene;
   robot.userData.type = "robot";
   scene.add(robot);
 
-  // Inyectamos la escena y el robot glTF después de cargarlo
   setScene(scene, robot); 
 });
 
